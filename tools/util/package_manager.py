@@ -20,6 +20,7 @@ import urllib.error
 import urllib.request
 
 from tools.util import log
+from tools.util import platform
 
 PKG_REPO = "https://github.com/I-A-S/IAPackages/releases/download/release"
 
@@ -30,7 +31,7 @@ def install(name: str, on_status):
 def install_aux(name: str, on_status):
   pkg_config_path = f'./packages/{name}.iadpkg'
   if os.path.isfile(pkg_config_path): return
-  pkg_file_name = f"{name}.zip"
+  pkg_file_name = f"{name}-{platform.name()}.zip"
   on_status(name)
   try:
     urllib.request.urlretrieve(f"{PKG_REPO}/{pkg_file_name}", f"./packages/{pkg_file_name}")
